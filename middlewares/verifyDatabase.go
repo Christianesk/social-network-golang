@@ -8,7 +8,7 @@ import (
 
 func VerifyDatabase(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if db.CheckConnection() {
+		if !db.CheckConnection() {
 			http.Error(w, "Database connection error", 500)
 			return
 		}
