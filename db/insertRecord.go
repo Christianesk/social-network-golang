@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/Christianesk/social-network-golang/models"
@@ -22,6 +23,9 @@ func InsertRecord(user models.User) (string, bool, error) {
 	if err != nil {
 		return "", false, err
 	}
+
+	prueba := "asdasdas"
+	fmt.Println(prueba)
 
 	ObjectID, _ := result.InsertedID.(primitive.ObjectID)
 	return ObjectID.String(), true, nil
