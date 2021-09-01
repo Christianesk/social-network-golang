@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/Christianesk/social-network-golang/middlewares"
-	"github.com/Christianesk/social-network-golang/routers"
+	"github.com/Christianesk/social-network-golang/routes"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 )
@@ -14,8 +14,9 @@ import (
 func Handlers() {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/register", middlewares.VerifyDatabase(routers.RegisterUser)).Methods("POST")
-	router.HandleFunc("/login", middlewares.VerifyDatabase(routers.Login)).Methods("POST")
+	router.HandleFunc("/register", middlewares.VerifyDatabase(routes.RegisterUser)).Methods("POST")
+	router.HandleFunc("/login", middlewares.VerifyDatabase(routes.Login)).Methods("POST")
+	router.HandleFunc("/profile", middlewares.VerifyDatabase(middlewares.ValidateJWT(routes.Profile))).Methods("GET")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
