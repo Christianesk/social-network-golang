@@ -17,6 +17,7 @@ func Handlers() {
 	router.HandleFunc("/register", middlewares.VerifyDatabase(routes.RegisterUser)).Methods("POST")
 	router.HandleFunc("/login", middlewares.VerifyDatabase(routes.Login)).Methods("POST")
 	router.HandleFunc("/profile", middlewares.VerifyDatabase(middlewares.ValidateJWT(routes.Profile))).Methods("GET")
+	router.HandleFunc("/update_profile", middlewares.VerifyDatabase(middlewares.ValidateJWT(routes.UpdateProfile))).Methods("PUT")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
